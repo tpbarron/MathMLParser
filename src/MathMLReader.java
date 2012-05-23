@@ -1,16 +1,26 @@
 
 public class MathMLReader {
 	
+	private static MathMLMathSpeak mathSpeak;
+	private static MathMLParser parser;
+	
+	private static final String[] files = {
+			"mathml_cauchy.xml", "mathml_quadeq.xml"
+		};
+	
 	public static MathMLCharCodes charCodes;
 	
 	public static void main(String args[]) {
 		charCodes = new MathMLCharCodes("htmlcharcodes.txt");
 		
-		MathMLParser parser = new MathMLParser("mathml_cauchy.xml");
-		parser.parseMathML();
-		parser.getTree().mathSpeak();
+		parser = MathMLParser.getInstance();
+		parser.setFile(files[1]);
+		parser.parse();
 		
-		//parser.getTree().printTree();
+		mathSpeak = MathMLMathSpeak.getInstance();
+		mathSpeak.setMathMLTree(parser.getTree());
+		mathSpeak.mathSpeak();
+		
 	}
 
 }

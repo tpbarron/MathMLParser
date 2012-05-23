@@ -13,13 +13,31 @@ import org.xml.sax.SAXException;
 
 public class MathMLParser {
 	
-	private String filename;
-	private Document dom;
-	private MathMLTree mathMlTree;
+	private static MathMLParser instance = null;
 	
-	public MathMLParser(String file) {
+	private static String filename;
+	private static Document dom;
+	private static MathMLTree mathMlTree;
+	
+	public static synchronized MathMLParser getInstance() {
+		if (instance == null) {
+			instance = new MathMLParser();
+		}
+		return instance;
+	}
+	
+
+	public void setFile(String file) {
 		filename = file;
-		parseDoc();
+	}
+	
+	public void parse() {
+		if (filename != null) {
+			parseDoc();
+			parseMathML();
+		} else {
+			System.err.print("please set file to parse first");
+		}
 	}
 	
 	private void parseDoc() {
@@ -36,7 +54,7 @@ public class MathMLParser {
 		}
 	}
 	
-	public void parseMathML() {
+	private void parseMathML() {
 		Element root = dom.getDocumentElement();
 		MathMLTreeNode rootNode = new MathMLTreeNode(new MathMLElement(root.getNodeName(), root.getTextContent()));
 		mathMlTree = new MathMLTree(rootNode);
@@ -54,7 +72,7 @@ public class MathMLParser {
 					MathMLTreeNode child;
 					if (MathMLTags.isTokenElement(name)) {
 						String attr = n.getTextContent();
-						System.out.println(attr);
+						//System.out.println(attr);
 						child = parent.addChild(new MathMLElementToken(name, attr));
 					} else if (MathMLTags.isGeneralLayoutElement(name)) {
 						child = parent.addChild(new MathMLElementGeneralLayout(name));
