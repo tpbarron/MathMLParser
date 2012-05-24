@@ -53,11 +53,17 @@ public class MathMLMathSpeak {
 	
 	private void mathSpeak(MathMLTreeNode n) {
 		MathMLElement e = n.getElement();
-		//the mathSpeak() method is called recursively from within
-		//processElement
+		checkValid(e, n);
+		//the mathSpeak() method is called recursively from within processElement()
 		startElement(e);
 		processElement(e, n);
 		endElement();
+	}
+	
+	//TODO: create validity check for each element
+	private boolean checkValid(MathMLElement e, MathMLTreeNode n) {
+		
+		return true;
 	}
 	
 	private void startElement(MathMLElement e) {

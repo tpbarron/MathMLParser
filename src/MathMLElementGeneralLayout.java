@@ -1,9 +1,11 @@
+import org.w3c.dom.NamedNodeMap;
+
 
 public class MathMLElementGeneralLayout extends MathMLElement {
 
 	
-	public MathMLElementGeneralLayout(String e) {
-		super(e, "");
+	public MathMLElementGeneralLayout(String e, NamedNodeMap attrs) {
+		super(e, attrs);
 	}
 	
 	public String startHandler(int verbosity) {

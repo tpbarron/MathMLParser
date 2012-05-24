@@ -1,8 +1,10 @@
+import org.w3c.dom.NamedNodeMap;
+
 
 public class MathMLElementToken extends MathMLElement {
 	
-	public MathMLElementToken(String e, String content) {
-		super(e, content);
+	public MathMLElementToken(String e, String content, NamedNodeMap attrs) {
+		super(e, content, attrs);
 	}
 
 	public String getMathSpeak(int verbosity) {

@@ -1,14 +1,22 @@
+import org.w3c.dom.NamedNodeMap;
+
 
 public class MathMLElement {
 	
 	protected String type;
 	protected String content;
+	protected NamedNodeMap attrs;
 	
 	public MathMLElement() {}
 	
-	public MathMLElement(String e, String content) {
-		type = e;
+	public MathMLElement(String type, NamedNodeMap attrs) {
+		this(type, "", attrs);
+	}
+	
+	public MathMLElement(String type, String content, NamedNodeMap attrs) {
+		this.type = type;
 		this.content = content;
+		this.attrs = attrs;
 	}
 
 	public String getType() {
@@ -45,6 +53,26 @@ public class MathMLElement {
 	
 	public boolean hasEndHandler() {
 		return false;
+	}
+	
+	public boolean hasAttributes() {
+		return attrs.getLength() > 0;
+	}
+	
+	/**
+	 * @param attrName
+	 * @return true if attrName is in the attribute map
+	 */
+	public boolean hasAttribute(String attrName) {
+		return attrs.getNamedItem(attrName) != null;
+	}
+	
+	/**
+	 * @param attrName
+	 * @return the value of the attribute
+	 */
+	public String getAttribute(String attrName) {
+		return attrs.getNamedItem(attrName).getNodeValue();
 	}
 	
 	public String toString() {

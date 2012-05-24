@@ -41,41 +41,4 @@ public class MathMLTree {
 		}
 	}
 	
-	
-	private String mathSpeak = "";
-	private Stack<MathMLElement> tagStack = new Stack<MathMLElement>();
-	public void mathSpeak() {
-		mathSpeak(root);
-		System.out.println(mathSpeak);
-	}
-	private void mathSpeak(MathMLTreeNode n) {
-		MathMLElement e = n.getElement();
-		if (e.hasStartHandler()) 
-			mathSpeak += e.startHandler() + " ";
-		
-		tagStack.push(e);
-		System.out.println(tagStack);
-		
-		if (n.hasChildren()) {
-			for (int i = 0; i < n.getNumChildren(); i++) {
-				MathMLTreeNode child = n.getChild(i);
-				
-				if (i == 1 && e.hasMiddleHandler())
-					mathSpeak += e.middleHandler() + " ";
-
-				mathSpeak(child);
-			}
-		} else { //should be a token element?
-			mathSpeak += e.getMathSpeak();
-		}
-		
-		MathMLElement end = tagStack.pop();
-		if  (end.hasEndHandler()) 
-			mathSpeak += end.endHandler() + " ";
-		else 
-			mathSpeak += " ";
-		
-		System.out.println(tagStack);
-	}
-
 }

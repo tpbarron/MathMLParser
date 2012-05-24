@@ -1,8 +1,10 @@
+import org.w3c.dom.NamedNodeMap;
+
 
 public class MathMLElementScriptLayout extends MathMLElement {
 	
-	public MathMLElementScriptLayout(String e) {
-		super(e, "");
+	public MathMLElementScriptLayout(String e, NamedNodeMap attrs) {
+		super(e, attrs);
 	}
 	
 	

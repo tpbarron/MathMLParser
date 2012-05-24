@@ -6,6 +6,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -56,7 +57,8 @@ public class MathMLParser {
 	
 	private void parseMathML() {
 		Element root = dom.getDocumentElement();
-		MathMLTreeNode rootNode = new MathMLTreeNode(new MathMLElement(root.getNodeName(), root.getTextContent()));
+		MathMLTreeNode rootNode = new MathMLTreeNode(
+				new MathMLElement(root.getNodeName(), root.getAttributes()));
 		mathMlTree = new MathMLTree(rootNode);
 		
 		parseMathMLNode(root, rootNode);
@@ -70,18 +72,18 @@ public class MathMLParser {
 				String name = n.getNodeName();
 				if (!name.equalsIgnoreCase("#text")) {
 					MathMLTreeNode child;
+					NamedNodeMap attrs = n.getAttributes();
 					if (MathMLTags.isTokenElement(name)) {
-						String attr = n.getTextContent();
-						//System.out.println(attr);
-						child = parent.addChild(new MathMLElementToken(name, attr));
+						String text = n.getTextContent();
+						child = parent.addChild(new MathMLElementToken(name, text, attrs));
 					} else if (MathMLTags.isGeneralLayoutElement(name)) {
-						child = parent.addChild(new MathMLElementGeneralLayout(name));
+						child = parent.addChild(new MathMLElementGeneralLayout(name, attrs));
 					} else if (MathMLTags.isScriptLayoutElement(name)) {
-						child = parent.addChild(new MathMLElementScriptLayout(name));
+						child = parent.addChild(new MathMLElementScriptLayout(name, attrs));
 					} else if (MathMLTags.isTabularElement(name)) {
-						child = parent.addChild(new MathMLElementTabularLayout(name));
+						child = parent.addChild(new MathMLElementTabularLayout(name, attrs));
 					} else {
-						child = parent.addChild(new MathMLElement(name, ""));
+						child = parent.addChild(new MathMLElement(name, attrs));
 					}
 					parseMathMLNode(n, child);
 				}
