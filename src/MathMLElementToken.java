@@ -5,7 +5,7 @@ public class MathMLElementToken extends MathMLElement {
 		super(e, content);
 	}
 
-	public String getMathSpeak() {
+	public String getMathSpeak(int verbosity) {
 		if (type.equalsIgnoreCase(MathMLTags.OPERATOR)) {
 			//need to check char codes
 		} else if (type.equalsIgnoreCase(MathMLTags.IDENTIFIER)) {

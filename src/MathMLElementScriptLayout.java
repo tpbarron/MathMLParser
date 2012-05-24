@@ -6,16 +6,16 @@ public class MathMLElementScriptLayout extends MathMLElement {
 	}
 	
 	
-	public String endHandler() {
+	public String endHandler(int verbosity) {
 		if (type.equalsIgnoreCase(MathMLTags.SUPERSCRIPT)) {
 			return "Baseline";
 		} else if (type.equalsIgnoreCase(MathMLTags.SUBSCRIPT)) {
 			return "Baseline";
 		}
-		return "";
+		return super.endHandler(verbosity);
 	}
 
-	public String middleHandler() {
+	public String middleHandler(int verbosity) {
 		if (type.equalsIgnoreCase(MathMLTags.SUPERSCRIPT)) {
 			return "Superscript";
 		} else if (type.equalsIgnoreCase(MathMLTags.SUBSCRIPT)) {
@@ -23,7 +23,7 @@ public class MathMLElementScriptLayout extends MathMLElement {
 		} else if (type.equalsIgnoreCase(MathMLTags.SUBSUPERPAIR)) {
 			return "";
 		}
-		return "";
+		return super.middleHandler(verbosity);
 	}
 	
 	public boolean hasMiddleHandler() {

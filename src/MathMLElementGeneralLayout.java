@@ -6,7 +6,7 @@ public class MathMLElementGeneralLayout extends MathMLElement {
 		super(e, "");
 	}
 	
-	public String startHandler() {
+	public String startHandler(int verbosity) {
 		if (type.equalsIgnoreCase(MathMLTags.MROW)) {
 			return "";
 		} else if (type.equalsIgnoreCase(MathMLTags.FRAC)) {
@@ -16,11 +16,11 @@ public class MathMLElementGeneralLayout extends MathMLElement {
 		} else if (type.equalsIgnoreCase(MathMLTags.ROOT)) {
 			return "StartRoot";
 		} else {
-			return super.startHandler();
+			return super.startHandler(verbosity);
 		}
 	}	
 	
-	public String endHandler() {
+	public String endHandler(int verbosity) {
 		if (type.equalsIgnoreCase(MathMLTags.MROW)) {
 			return "";
 		} else if (type.equalsIgnoreCase(MathMLTags.FRAC)) {
@@ -30,15 +30,15 @@ public class MathMLElementGeneralLayout extends MathMLElement {
 		} else if (type.equalsIgnoreCase(MathMLTags.ROOT)) {
 			return "EndRoot";
 		} else {
-			return super.endHandler();
+			return super.endHandler(verbosity);
 		}
 	}	
 	
-	public String middleHandler() {
+	public String middleHandler(int verbosity) {
 		if (type.equalsIgnoreCase(MathMLTags.FRAC)) {
 			return "Over";
 		}
-		return super.middleHandler(); 
+		return super.middleHandler(verbosity); 
 	}
 	
 	public boolean hasStartHandler() {

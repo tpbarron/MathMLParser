@@ -40,7 +40,6 @@ public class MathMLCharCodes {
 	}
 	
 	public String getTextForCode(String code) {
-		System.out.println(code.toCharArray());
 		String t = codeMap.get(code);
 		if (t != null) {
 			return t;

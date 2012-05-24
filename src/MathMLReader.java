@@ -19,7 +19,9 @@ public class MathMLReader {
 		
 		mathSpeak = MathMLMathSpeak.getInstance();
 		mathSpeak.setMathMLTree(parser.getTree());
-		mathSpeak.mathSpeak();
+		mathSpeak.setVerbosity(MathMLMathSpeak.Settings.MATHSPEAK_VERBOSE);
+		String m = mathSpeak.mathSpeak().toString();
+		System.out.println(m);
 		
 	}
 

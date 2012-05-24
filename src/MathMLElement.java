@@ -19,19 +19,19 @@ public class MathMLElement {
 		return content;
 	}
 	
-	public String getMathSpeak() {
+	public String getMathSpeak(int v) {
 		return "";
 	}
 	
-	public String startHandler() {
+	public String startHandler(int v) {
 		return "";
 	}
 	
-	public String endHandler() {
+	public String endHandler(int v) {
 		return "";
 	}
 	
-	public String middleHandler() {
+	public String middleHandler(int v) {
 		return "";
 	}
 	
