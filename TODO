@@ -1,0 +1,14 @@
+go through MathML tag specification and note what tags to account for
+
+go through specification and implement step by step
+
+mfenced tag has open, close, and separators attributes.
+will have to check those to know whether [] or () and sep or no
+
+do I need to check if mathml is valid?
+
+do I need to be able to parse content mathml or just presentation mathml
+
+does android tts speak decimals with points like: three point one four?
+
+can I assume there is no extra white space in the tags?
