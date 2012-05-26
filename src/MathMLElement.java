@@ -75,6 +75,10 @@ public class MathMLElement {
 		return attrs.getNamedItem(attrName).getNodeValue();
 	}
 	
+	public boolean isValid(MathMLTreeNode n) {
+		return false;
+	}
+	
 	public String toString() {
 		return type;
 	}

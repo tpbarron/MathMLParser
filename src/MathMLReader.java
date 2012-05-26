@@ -5,7 +5,7 @@ public class MathMLReader {
 	private static MathMLParser parser;
 	
 	private static final String[] files = {
-			"mathml_cauchy.xml", "mathml_quadeq.xml"
+			"mathml_cauchy.xml", "mathml_quadeq.xml", "mathml_numbertest.xml"
 		};
 	
 	public static MathMLCharCodes charCodes;
@@ -14,12 +14,12 @@ public class MathMLReader {
 		charCodes = new MathMLCharCodes("htmlcharcodes.txt");
 		
 		parser = MathMLParser.getInstance();
-		parser.setFile(files[1]);
+		parser.setFile(files[2]);
 		parser.parse();
 		
 		mathSpeak = MathMLMathSpeak.getInstance();
 		mathSpeak.setMathMLTree(parser.getTree());
-		mathSpeak.setVerbosity(MathMLMathSpeak.Settings.MATHSPEAK_VERBOSE);
+		mathSpeak.setVerbosity(MathMLMathSpeak.Settings.MATHSPEAK_BRIEF);
 		String m = mathSpeak.mathSpeak().toString();
 		System.out.println(m);
 		

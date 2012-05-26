@@ -11,12 +11,11 @@ public class MathMLMathSpeak {
 	private StringBuffer mathSpeak = new StringBuffer();
 	
 
+	//mathspeak settings
 	public static class Settings {
-
 		final static int MATHSPEAK_VERBOSE = 0;
 		final static int MATHSPEAK_BRIEF = 1;
 		final static int MATHSPEAK_SUPERBRIEF = 2;
-	
 	}
 
 	public static synchronized MathMLMathSpeak getInstance() {
@@ -53,18 +52,16 @@ public class MathMLMathSpeak {
 	
 	private void mathSpeak(MathMLTreeNode n) {
 		MathMLElement e = n.getElement();
-		checkValid(e, n);
+		//checkValid(e, n);
 		//the mathSpeak() method is called recursively from within processElement()
 		startElement(e);
 		processElement(e, n);
 		endElement();
 	}
 	
-	//TODO: create validity check for each element
-	private boolean checkValid(MathMLElement e, MathMLTreeNode n) {
-		
-		return true;
-	}
+	//private boolean checkValid(MathMLElement e, MathMLTreeNode n) {
+	//	return e.isValid(n);
+	//}
 	
 	private void startElement(MathMLElement e) {
 		if (e.hasStartHandler()) {
@@ -75,16 +72,9 @@ public class MathMLMathSpeak {
 	}
 	
 	private void processElement(MathMLElement e, MathMLTreeNode n) {
-		if (e.hasMiddleHandler() && n.getNumChildren() != 2) {
-			System.err.println("Element: " + e.toString() + 
-					", must have exactly 2 children"); 
-			return;
-		}
-		
 		if (n.hasChildren()) {
 			for (int i = 0; i < n.getNumChildren(); i++) {
 				MathMLTreeNode child = n.getChild(i);
-				
 				if (i == 1 && e.hasMiddleHandler()) {
 					mathSpeak.append(e.middleHandler(verbosity) + " ");
 				}

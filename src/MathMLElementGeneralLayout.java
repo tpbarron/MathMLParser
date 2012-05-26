@@ -9,7 +9,7 @@ public class MathMLElementGeneralLayout extends MathMLElement {
 	}
 	
 	public String startHandler(int verbosity) {
-		if (type.equalsIgnoreCase(MathMLTags.MROW)) {
+		if (type.equalsIgnoreCase(MathMLTags.ROW)) {
 			return "";
 		} else if (type.equalsIgnoreCase(MathMLTags.FRAC)) {
 			return "StartFraction";
@@ -23,7 +23,7 @@ public class MathMLElementGeneralLayout extends MathMLElement {
 	}	
 	
 	public String endHandler(int verbosity) {
-		if (type.equalsIgnoreCase(MathMLTags.MROW)) {
+		if (type.equalsIgnoreCase(MathMLTags.ROW)) {
 			return "";
 		} else if (type.equalsIgnoreCase(MathMLTags.FRAC)) {
 			return "EndFraction";
@@ -62,6 +62,18 @@ public class MathMLElementGeneralLayout extends MathMLElement {
 	public boolean hasMiddleHandler() {
 		if (type.equalsIgnoreCase(MathMLTags.FRAC)) {
 			return true;
+		}
+		return false;
+	}
+	
+	public boolean isValid(MathMLTreeNode n) {
+		if (type.equalsIgnoreCase(MathMLTags.FRAC)) {
+			//check 2 children
+		} else if (type.equalsIgnoreCase(MathMLTags.SQRT)) {
+			//check 1 or 2 children
+			//if one child, must be TokenElement
+		} else if (type.equalsIgnoreCase(MathMLTags.ROOT)) {
+			//check 2 children
 		}
 		return false;
 	}

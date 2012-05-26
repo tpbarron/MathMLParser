@@ -11,15 +11,24 @@ public class MathMLTags {
 	final static String TEXT = "mtext";
 	final static String SPACE = "mspace";
 	final static String STRINGLITERAL = "ms";
-	final static String[] tokenElements = {IDENTIFIER, NUMBER, OPERATOR, TEXT, SPACE, STRINGLITERAL};
+	//mglyph is special and is only used within token elements
+	final static String GLYPH = "mglyph";
+	final static String[] tokenElements = {
+		IDENTIFIER, NUMBER, OPERATOR, TEXT, SPACE, STRINGLITERAL, GLYPH
+	};
 	
 	//general layout schemata
-	final static String MROW = "mrow";
+	//I will assume some of the tags in the specification do not need to be
+	//accounted for here: mstyle, merror, mpadded, mphantom
+	final static String ROW = "mrow";
 	final static String FRAC = "mfrac";
 	final static String SQRT = "msqrt";
 	final static String ROOT = "mroot";
-	//final static String STYLE = "mstyle";
-	final static String[] generalLayoutElements = {MROW, FRAC, SQRT, ROOT};
+	final static String FENCED = "mfenced";
+	final static String ENCLOSE = "menclose";
+	final static String[] generalLayoutElements = {
+		ROW, FRAC, SQRT, ROOT, FENCED, ENCLOSE
+	};
 	
 	//script, limit schemata
 	final static String SUPERSCRIPT = "msup";
@@ -34,14 +43,27 @@ public class MathMLTags {
 	};
 	
 	//tabular math
+	//is alignment important for speech?
 	final static String TABLE = "mtable";
 	final static String TABLEROW = "mtr";
 	final static String LABELEDTABLEROW = "mlabeledtr";
 	final static String TABLEENTRY = "mtd";
 	//final static String ALIGNMENT = "maligngroup/malignmark";
-	final static String[] tabularElements = {TABLE, TABLEROW, LABELEDTABLEROW, TABLEENTRY};
+	final static String[] tabularElements = {
+		TABLE, TABLEROW, LABELEDTABLEROW, TABLEENTRY
+	};
 	
 	//elemenary math
+	final static String STACK = "mstack";
+	final static String LONGDIV = "mlongdiv";
+	final static String SGROUP = "msgroup";
+	final static String SROW = "msrow";
+	final static String SCARRIES = "mscarries";
+	final static String SCARRY = "mscarry";
+	final static String SLINE = "msline";
+	final static String[] elementaryElements = {
+		STACK, LONGDIV, SGROUP, SROW, SCARRIES, SCARRY, SLINE
+	};
 	
 	public static final boolean isTokenElement(String e) {
 		for (String s : tokenElements) {
@@ -66,6 +88,13 @@ public class MathMLTags {
 	
 	public static final boolean isTabularElement(String e) {
 		for (String s : tabularElements) {
+			if (s.equalsIgnoreCase(e)) return true;
+		}
+		return false;
+	}
+	
+	public static final boolean isElementaryElement(String e) {
+		for (String s : elementaryElements) {
 			if (s.equalsIgnoreCase(e)) return true;
 		}
 		return false;

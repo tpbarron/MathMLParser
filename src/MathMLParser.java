@@ -82,6 +82,8 @@ public class MathMLParser {
 						child = parent.addChild(new MathMLElementScriptLayout(name, attrs));
 					} else if (MathMLTags.isTabularElement(name)) {
 						child = parent.addChild(new MathMLElementTabularLayout(name, attrs));
+					} else if (MathMLTags.isElementaryElement(name)) {
+						child = parent.addChild(new MathMLElementElementary(name, attrs));
 					} else {
 						child = parent.addChild(new MathMLElement(name, attrs));
 					}
